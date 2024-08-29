@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 class ServiceCodeInputType(graphene.String):
     @staticmethod
     def coerce_string(value):
-        assert_string_length(value, 6)
+        assert_string_length(value, 50)
         return value
 
     serialize = coerce_string
@@ -32,7 +32,7 @@ class ServiceCodeInputType(graphene.String):
     @staticmethod
     def parse_literal(ast):
         result = graphene.String.parse_literal(ast)
-        assert_string_length(result, 6)
+        assert_string_length(result, 50)
         return result
 
 
