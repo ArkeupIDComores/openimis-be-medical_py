@@ -1,6 +1,6 @@
 import string
 import uuid
-
+from django.apps import apps
 from core.models import VersionedModel, ObjectMutation
 from django.db import models
 from django.utils import timezone as django_tz 
@@ -13,6 +13,7 @@ import core
 from medical.apps import MedicalConfig
 from medical.services import set_item_or_service_deleted
 
+core_config = apps.get_app_config('core')
 
 class Diagnosis(core_models.VersionedModel):
     id = models.AutoField(db_column='ICDID', primary_key=True)
@@ -59,7 +60,7 @@ class ItemOrService:
 class Item(VersionedModel, ItemOrService):
     id = models.AutoField(db_column='ItemID', primary_key=True)
     uuid = models.CharField(db_column='ItemUUID', max_length=36, default=uuid.uuid4, unique=True)
-    code = models.CharField(db_column='ItemCode', max_length=50)
+    code = models.CharField(db_column='ItemCode', max_length=30)
     name = models.CharField(db_column='ItemName', max_length=100)
     type = models.CharField(db_column='ItemType', max_length=1)
     package = models.CharField(db_column='ItemPackage', max_length=255, blank=True, null=True)
@@ -170,7 +171,7 @@ class Service(VersionedModel, ItemOrService):
                             max_length=36, default=uuid.uuid4, unique=True)
     # legacy_id = models.IntegerField(db_column='LegacyID', blank=True, null=True)
     category = models.CharField(db_column='ServCategory', max_length=1, blank=True, null=True)
-    code = models.CharField(db_column='ServCode', max_length=50)
+    code = models.CharField(db_column='ServCode', max_length=30)
     name = models.CharField(db_column='ServName', max_length=100)
     type = models.CharField(db_column='ServType', max_length=1)
     packagetype = models.CharField(db_column='ServPackageType', choices=PackageTypes.choices, max_length=1, default=PackageTypes.S)
