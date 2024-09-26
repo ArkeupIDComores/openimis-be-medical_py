@@ -12,8 +12,8 @@ DEFAULT_CFG = {
     "gql_mutation_medical_services_add_perms": ['121402'],
     "gql_mutation_medical_services_update_perms": ['121403'],
     "gql_mutation_medical_services_delete_perms": ['121404'],
-    "max_service_code_length":50,
-    "max_item_code_length":50,
+    "max_service_code_length":6,
+    "max_item_code_length":6,
 
 }
 
