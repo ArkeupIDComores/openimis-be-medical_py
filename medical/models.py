@@ -12,8 +12,9 @@ from django.conf import settings
 import core
 from medical.apps import MedicalConfig
 from medical.services import set_item_or_service_deleted
-
 core_config = apps.get_app_config('core')
+import datetime
+
 
 class Diagnosis(core_models.VersionedModel):
     id = models.AutoField(db_column='ICDID', primary_key=True)
@@ -153,7 +154,6 @@ def save_history_on_update(sender, instance, **kwargs):
     if instance != old_instance:
         # One or more fields have changed, so save history
         old_instance.save_history()
-        from core import datetime
         now = datetime.datetime.now()
         instance.validity_from = now
 
@@ -285,7 +285,6 @@ def save_history_on_update(sender, instance, **kwargs):
     if instance != old_instance:
         # One or more fields have changed, so save history
         old_instance.save_history()
-        from core import datetime
         now = datetime.datetime.now()
         instance.validity_from = now
 
@@ -295,7 +294,7 @@ class ServiceService(models.Model):
     id = models.AutoField(primary_key=True, db_column='idSCP')
     service = models.ForeignKey(Service, models.DO_NOTHING,
                               db_column='ServiceId', related_name='servicesServices')
-    servicelinkedService = models.ForeignKey( Service,
+    parent = models.ForeignKey( Service,
                                           models.DO_NOTHING, db_column="ServiceLinked")
     qty_provided = models.IntegerField(db_column="qty",
                                       blank=True, null=True)
@@ -314,7 +313,7 @@ class ServiceItem(models.Model):
     """class representing relation between package and product """
     id = models.AutoField(primary_key=True, db_column='idPCP')
     item = models.ForeignKey(Item, models.DO_NOTHING, db_column='ItemID', related_name="itemsServices")                           
-    servicelinkedItem = models.ForeignKey( Service,
+    parent = models.ForeignKey( Service,
                                           models.DO_NOTHING, db_column="ServiceID",related_name='servicesLinked')
     qty_provided = models.IntegerField(db_column="qty",
                                       blank=True, null=True)
