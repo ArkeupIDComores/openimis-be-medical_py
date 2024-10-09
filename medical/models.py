@@ -12,6 +12,7 @@ from django.conf import settings
 import core
 from medical.apps import MedicalConfig
 from medical.services import set_item_or_service_deleted
+
 import datetime
 
 
@@ -21,7 +22,6 @@ class Diagnosis(core_models.VersionedModel):
     name = models.CharField(db_column='ICDName', max_length=255)
 
     audit_user_id = models.IntegerField(db_column='AuditUserID')
-    
     # row_id = models.BinaryField(db_column='RowID', blank=True, null=True)
 
     def __str__(self):
