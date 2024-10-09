@@ -12,7 +12,7 @@ from django.conf import settings
 import core
 from medical.apps import MedicalConfig
 from medical.services import set_item_or_service_deleted
-core_config = apps.get_app_config('core')
+
 import datetime
 
 
