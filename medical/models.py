@@ -72,6 +72,7 @@ class Item(VersionedModel, ItemOrService):
     frequency = models.SmallIntegerField(db_column='ItemFrequency', blank=True, null=True)
     patient_category = models.SmallIntegerField(db_column='ItemPatCat')
     audit_user_id = models.IntegerField(db_column='AuditUserID')
+    pre_authorization_required =models.BooleanField(db_column='preAuthorizationRequired',default=False)
     # row_id = models.BinaryField(db_column='RowID', blank=True, null=True)
 
     def __bool__(self):
@@ -182,6 +183,8 @@ class Service(VersionedModel, ItemOrService):
     care_type = models.CharField(db_column='ServCareType', max_length=1)
     frequency = models.SmallIntegerField(db_column='ServFrequency', blank=True, null=True)
     patient_category = models.SmallIntegerField(db_column='ServPatCat', default=DEFAULT_PATIENT_CATEGORY)
+    pre_authorization_required =models.BooleanField(db_column='preAuthorizationRequired',default=False)
+
 
     # validity_from = fields.DateTimeField(db_column='ValidityFrom', blank=True, null=True)
     # validity_to = fields.DateTimeField(db_column='ValidityTo', blank=True, null=True)

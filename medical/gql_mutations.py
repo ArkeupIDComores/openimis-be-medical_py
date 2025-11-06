@@ -80,6 +80,7 @@ class ItemOrServiceInputType(OpenIMISMutation.Input):
     frequency = graphene.Decimal(required=False)
     price = graphene.Decimal(required=True)
     maximum_amount = graphene.Decimal(required=False)
+    pre_authorization_required=graphene.Boolean(required=False)
 
 
 class ServiceInputType(ItemOrServiceInputType):

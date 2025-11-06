@@ -20,6 +20,7 @@ class ServiceGQLType(DjangoObjectType):
             'packagetype': ['exact', 'in'],
             'care_type': ['exact'],
             'category': ['exact'],
+            'pre_authorization_required':['exact']
         }
         connection_class = ExtendedConnection
 
